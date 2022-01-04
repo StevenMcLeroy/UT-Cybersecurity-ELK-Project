@@ -74,6 +74,7 @@ The playbook implements the following tasks:
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
+	
 	Ruby-Web-1: 10.2.0.5
 	Ruby-Web-2: 10.2.0.6
 	Ruby-Web-3: 10.2.0.8
