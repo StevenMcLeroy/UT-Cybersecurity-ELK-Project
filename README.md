@@ -25,6 +25,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 Load balancing helps ensure that the application will be highly redundant and may be used to restrict unauthorized access to the network. In addition to providing redundancy (thus increasing availability) load balancers are advantageous given that they are hardened devices that both monitor traffic and control access to internal networks/resources. Furthermore, load balancers can protect against potential DDOS attacks and increase efficiency of network resources.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to system files and system resources.
+  
   - Filebeat monitors alterations to log and system files.
   - Metricbeat logs and monitors system resources (CPU, memory, network statistics, etc.)
 
@@ -45,6 +46,7 @@ The machines on the internal network are not exposed to the public Internet.
 Only the Jump Box Provisioner can accept connections from the Internet. Access to this machine is only allowed from the user’s public IP address. (User’s public IP address redacted given potential security ramifications.)
 
 Machines within the network can only be accessed by SSH from the Jump Box Provisioner.
+	
 	Ruby-Jump-Box: 23.99.207.162 (Public IP)/10.2.0.4(Private IP)
 
 A summary of the access policies in place can be found in the table below.
@@ -81,6 +83,7 @@ This ELK server is configured to monitor the following machines:
 	Ruby-Web-3: 10.2.0.8
 
 We have installed the following Beats on these machines:
+	
 	Filebeat
 	Metricbeat
 
