@@ -8,7 +8,7 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-  https://github.com/the-Coding-Boot-Camp-at-UT/UTA-VIRT-CYBER-PT-09-2021-U-LOL/blob/master/1-Lesson-Plans/13-Elk-Stack-Project/Activities/Stu_Day_1/Unsolved/Resources/install-elk.yml
+  ** Insert elk, ansible, metricbeat, filebeat playbooks from azure here**
 
 This document contains the following details:
 - Description of the Topology
@@ -26,7 +26,7 @@ Load balancing helps ensure that the application will be highly redundant and ma
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to system files and system resources.
   
-  - Filebeat monitors alterations to log and system files.
+  - Filebeat monitors alterations to system and log files.
   - Metricbeat logs and monitors system resources (CPU, memory, network statistics, etc.)
 
 The configuration details of each machine may be found below.
@@ -53,10 +53,10 @@ A summary of the access policies in place can be found in the table below.
 
 | Name           | Publicly Accessible | Allowed IP Addresses |
 |----------------|---------------------|----------------------|
-|Ruby-Jump-Box   |Yes                  |User’s IP Address     |
+|Ruby-Jump-Box   |No (requires SSH key)|User’s IP Address     |
 |Ruby-Web-1      |No                   |10.2.0.4              |
 |Ruby-Web-2      |No                   |10.2.0.4              |
-|Ruby-Web-2      |No                   |10.2.0.4              |
+|Ruby-Web-3      |No                   |10.2.0.4              |
 |Ruby-ELK-Server |No                   |User’s IP, 10.2.0.4   |
 
 ### Elk Configuration
@@ -66,10 +66,10 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 The playbook implements the following tasks:
 	
 	- Installs Docker.io
-	- Installs Python-pip3
+	- Installs python3-pip
 	- Downloads and configures the ELK container
 	- Increase virtual memory of the ELK-Server
-	- Activates ports 5601, 9200, and 5044
+	- Configures ports 5601, 9200, and 5044
   
   The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -83,21 +83,25 @@ This ELK server is configured to monitor the following machines:
 	Ruby-Web-3: 10.2.0.8
 
 We have installed the following Beats on these machines:
-	
+
 	Filebeat
 	Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+
+	-Filebeat collects log data. An example of Filebeat in practice may be found in the Apache module which examines access and error logs from the Apache HTTP server.
+	-Metricbeat collects host metrics. An example of Metricbeat in practice may be found with the Azure module which collects amd examines logs and values related to a system or a system componet at a particular point in time.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the install-elk.yml file to /etc/ansible/ directory
-- Update the etc/ansible/hosts file to include the ELK sever
-- Run the playbook, and navigate to http://<ELK.VM.External.IP>:5601/app/kibana to check that the installation worked as expected. As the ELK-Server uses a dynamic external IP address, be careful to use the appropriate IP for the session in question.
 
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
+	- Copy the ansible host file to /etc/ansible/ directory
+	- Update the etc/ansible/hosts file to include IP addresses of the DVMA VMs and the ELK sever.
+	- Run the playbook, and navigate to http://<ELK.VM.External.IP>:5601/app/kibana to check that the installation worked as expected. As the ELK-Server uses a dynamic external IP address, be careful to use the appropriate IP for the session in question.
+
+	- The ansible_config.yml is used make Ansible run the playbook on a specific machine. 
+	- Specifying which machines to install the ELK server on versus on which to install Filebeat and Metricbeat is address by the config file.
 
 
